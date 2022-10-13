@@ -3,7 +3,7 @@ import BigButton from "../components/BigButton.vue";
 </script>
 
 <template>
-  <h1 class="text-center display-1">Login</h1>
+  <h1 class="text-center display-1">Login please!</h1>
   <form>
     <svg
       xmlns="http://www.w3.org/2000/svg"
