@@ -2,7 +2,7 @@
   <div class="d-grid pt-5">
     <button
       type="button"
-      class="btn btn-primary btn-lg rounded-pill data-bs-toggle='button'"
+      class="btn btn-primary btn-lg rounded-pill data-bs-toggle='button' form-control"
     >
       <slot></slot>
     </button>
