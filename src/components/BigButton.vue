@@ -1,5 +1,5 @@
 <template>
-  <div class="d-grid pt-5">
+  <div class="d-grid">
     <button
       type="button"
       class="btn btn-primary btn-lg rounded-pill data-bs-toggle='button' form-control"
