@@ -4,17 +4,8 @@ import Envelope from "../components/icons/Envelope.vue";
 </script>
 
 <template>
-  <h1 class="text-center display-1">Login</h1>
+  <h1 class="text-center display-1">Login please!</h1>
   <form>
-    <div class="form-floating mb-3">
-      <input
-        type="name"
-        class="form-control"
-        id="floatingInput"
-        placeholder="John Smith"
-      />
-      <label for="floatingInput">Name</label>
-    </div>
     <div class="form-floating mb-3">
       <input
         type="email"
@@ -35,7 +26,7 @@ import Envelope from "../components/icons/Envelope.vue";
     </div>
 
     <div class="form-group">
-      <BigButton>Submit</BigButton>
+      <BigButton>Log In</BigButton>
     </div>
   </form>
 </template>

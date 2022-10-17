@@ -1,12 +1,11 @@
 <script setup>
 import BigButton from "../components/BigButton.vue";
-import Envelope from "../components/icons/Envelope.vue";
 </script>
 
 <template>
-  <h1 class="text-center display-1">Login</h1>
+  <h1 class="text-center display-1">Login please!</h1>
   <form>
-    <div class="form-floating mb-3">
+    <div class="orm-floating mb-3">
       <input
         type="name"
         class="form-control"
