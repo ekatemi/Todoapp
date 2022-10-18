@@ -1,6 +1,6 @@
 <template>
   <section>
-    <router-view class="app-main" />
+    <router-view />
     <!-- your routes will load inside of these tags -->
   </section>
 </template>
@@ -23,7 +23,7 @@ onMounted(async () => {
       // redirect them to logout if the user is not there
       await userStore.signUp("ekatemi@gmail.com", "password");
       console.log(user.value);
-      //router.push({ path: "/auth" });
+      router.push({ path: "/auth" });
     } else {
       // continue to dashboard
       router.push({ path: "/" });

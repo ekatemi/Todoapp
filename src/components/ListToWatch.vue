@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="container">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">An item</li>
@@ -12,4 +12,4 @@
 
 <script setup>
 
-</script>
+</script> -->
