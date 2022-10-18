@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 // @ts-ignore
 import HomeView from "../views/HomeView.vue";
 // @ts-ignore
-import LoginView from "../views/LoginView.vue";
+import LoginView from "../views/Auth.vue";
 
 const router = createRouter({
   // @ts-ignore
@@ -25,7 +25,7 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       // @ts-ignore
-      component: () => import("../views/AboutView.vue"),
+      //component: () => import("../views/AboutView.vue"),
     },
   ],
 });
