@@ -18,16 +18,28 @@ const router = createRouter({
       name: "auth",
       component: LoginView,
     },
-    {
-      /* path: "/about",
+
+    /*     /* path: "/about",
       name: "about", */
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      // @ts-ignore
-      //component: () => import("../views/AboutView.vue"),
-    },
+    // route level code-splitting
+    // this generates a separate chunk (About.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    // @ts-ignore
+    //component: () => import("../views/AboutView.vue"), *
   ],
 });
 
 export default router;
+
+/*router.beforeEach(async (to) => {
+  // redirect to login page if not logged in and trying to access a restricted page
+   const loginUrl = "/login";
+  const publicPages = [loginUrl];
+  const authRequired = !publicPages.includes(to.path);
+  const $store = useMapStore();
+
+  if (authRequired) {
+    if ($store.user) return;
+    return loginUrl;
+  }
+}); */
