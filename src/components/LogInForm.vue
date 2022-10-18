@@ -8,74 +8,79 @@ import {useUserStore} from "../stores/user"
 const userStore = useUserStore();
 
 
-const userLogged = ref(!true)
+const userExists = ref(false)
+
+
 const email = ref("");
 const password = ref("");
-
-onMounted(async () => {
-
-try {
-  await userStore.logIn(); // here we call fetch user
-  if (!user.value) {
-    // redirect them to logout if the user is not there
-
-    router.push({ path: "/auth" });
-  } else {
-    // continue to dashboard
-    router.push({ path: "/" });
-  }
-} catch (e) {
-  console.log(e);
+const password1 = ref("");
+const handleLogin = () => {
+  signIn(email, password)
 }
-});
+
+const handleSignup = (email, password) => {
+  if (email.length || password.value === password1.value) {
+    console.log("you are signed up")
+} else {
+  console.log("error")
+}
+}
 
 </script>
 
 <template>
     <button @onclick="userLogged = !userLogged">toggle</button>
     <!-- Log in -->
-<div v-if="userLogged">
+<div v-if="userExists">
   <div class="card mx-auto p-5" style="width: 26rem;">
-    <h1 class="text-center mb-5">Log in</h1>
-     
     <form @submit.prevent="handleLogin">
+      <h1 class="text-center mb-5">Log in</h1>  
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email address</label>
-            {{email.value}}
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" v-model="email" required>
+            <label for="floatingInput validationDefault01">Email address</label>
         </div>
-        <div class="form-floating mb-3">
-             <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <div class="form-floating mb-5">
+             <input type="password" class="form-control" id="floatingPassword" placeholder="Password" v-model="password" required>
             <label for="floatingPassword">Password</label>
         </div>
         <BigButton>Login</BigButton>
-        <div class="text-center pt-4">
-            <p>Don´t have an account yet?</p>
-        </div>
-    </form>
-    <BigButton>Sign Up</BigButton>
+      </form>
+      <div class="text-center pt-2">
+        <hr class="hr pt-3" />
+          <p>Don´t have an account yet?</p>
+      </div>
+    <BigButton @onclick="userLogged = !userLogged">Sign Up</BigButton>
     </div>
 </div>
 
 <!-- Sign up -->
 <div v-else>
     <div class="card mx-auto p-5" style="width: 26rem;">
+      <form @submit.prevent="handleSignup">
         <h1 class="text-center mb-5">Sign Up</h1>
-         <form>
             <div class="form-floating mb-3">
-                 <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                 <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" v-model="email" required>
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="password" class="form-control"  placeholder="Password">
+                <input type="password" class="form-control"  placeholder="Password" v-model="password" required>
                  <label for="floatingPassword">Password</label>
             </div>
-            <div class="form-floating mb-3">
-                <input type="password" class="form-control"  placeholder="Repeat password">
+            <div class="form-floating mb-5">
+                <input type="password" class="form-control"  placeholder="Repeat password" v-model="password1" required>
                 <label for="floatingPassword">Repeat password</label>
             </div>
             <BigButton>Submit</BigButton>
-        </form>
+          </form>
+          <div class="text-center pt-2">
+            <hr class="hr pt-3" />
+          <p>Have an account?</p>
+          <p>email:{{email}}</p>
+          <p>password: {{password}}</p>
+      
+      
+        </div>
+          <BigButton @onclick="userLogged = !userLogged">Sign In</BigButton>
     </div>
 </div>
 </template>

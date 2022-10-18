@@ -1,7 +1,7 @@
 <template>
   <div class="d-grid">
     <button
-      type="button"
+    type="submit"
       class="btn btn-primary btn-lg rounded-pill data-bs-toggle='button' form-control"
     >
       <slot></slot>
