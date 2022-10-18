@@ -24,31 +24,19 @@ const toggleSignform = () => {
 </script>
 
 <template>
-  <div class="background pt-5">
-    <div class="container-sm mx-auto p-4" style="width: 26rem">
-      <LogInForm v-if="activeLoginForm"></LogInForm>
-      <SignupForm v-if="activeSignupForm"></SignupForm>
-      <div class="text-center pt-2">
-        <hr class="hr" />
-        <p>{{ msg }}</p>
-      </div>
-      <BigButton @click="toggleSignform">{{ btnMsg }}</BigButton>
+  <div class="container-md mx-auto p-5 mt-4" style="width: 26rem">
+    <LogInForm v-if="activeLoginForm"></LogInForm>
+    <SignupForm v-if="activeSignupForm"></SignupForm>
+    <div class="text-center pt-2">
+      <hr class="hr" />
+      <p>{{ msg }}</p>
     </div>
+    <BigButton @click="toggleSignform">{{ btnMsg }}</BigButton>
   </div>
 </template>
 
 <style scoped>
-.background {
-  height: 100vh;
-  background: rgb(63, 94, 251);
-  background: linear-gradient(
-    90deg,
-    rgba(63, 94, 251, 1) 0%,
-    rgba(252, 70, 107, 0.1856092778908438) 100%
-  );
-}
-
-.container-sm {
+.container-md {
   background-color: white;
   border-radius: 0.3em;
   box-shadow: 0px 0px 56px -1px rgba(0, 0, 0, 0.42);

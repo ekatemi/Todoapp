@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="background">
     <router-view />
     <!-- your routes will load inside of these tags -->
   </section>
