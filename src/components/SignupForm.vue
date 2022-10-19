@@ -23,7 +23,7 @@ const handleSubmit = () => {
 
 <template>
   <form @submit.prevent="handleSubmit">
-    <h2 class="text-center mb-3">Sign Up</h2>
+    <h2 class="my-4 fw-bold text-center" style="color: #002D62">Sign Up</h2>
     <div class="form-floating mb-4">
       <input
         type="email"

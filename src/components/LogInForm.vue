@@ -16,7 +16,7 @@ const handleLogin = () => {
 
 <template>
   <form @submit.prevent="handleLogin">
-    <h2 class="text-center mb-3">Log in</h2>
+    <h2 class="my-4 fw-bold text-center" style="color: #002D62">Log in</h2>
     <div class="form-floating mb-4">
       <input
         type="email"
