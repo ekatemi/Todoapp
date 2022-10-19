@@ -24,7 +24,7 @@ const handleSubmit = () => {
 <template>
   <form @submit.prevent="handleSubmit">
     <h2 class="text-center mb-3">Sign Up</h2>
-    <div class="form-floating mb-3">
+    <div class="form-floating mb-4">
       <input
         type="email"
         class="form-control"
@@ -35,7 +35,7 @@ const handleSubmit = () => {
       />
       <label for="floatingInput">Email address</label>
     </div>
-    <div class="form-floating mb-3">
+    <div class="form-floating mb-4">
       <input
         type="password"
         class="form-control"
@@ -45,7 +45,7 @@ const handleSubmit = () => {
       />
       <label for="floatingPassword">Password</label>
     </div>
-    <div class="form-floating mb-3">
+    <div class="form-floating mb-4">
       <input
         type="password"
         class="form-control"

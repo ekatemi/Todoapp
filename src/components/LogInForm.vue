@@ -17,7 +17,7 @@ const handleLogin = () => {
 <template>
   <form @submit.prevent="handleLogin">
     <h2 class="text-center mb-3">Log in</h2>
-    <div class="form-floating mb-3">
+    <div class="form-floating mb-4">
       <input
         type="email"
         class="form-control"
@@ -28,7 +28,7 @@ const handleLogin = () => {
       />
       <label for="floatingInput validationDefault01">Email address</label>
     </div>
-    <div class="form-floating mb-3">
+    <div class="form-floating mb-4">
       <input
         type="password"
         class="form-control"
