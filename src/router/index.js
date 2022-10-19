@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-// @ts-ignore
+
 import HomeView from "../views/HomeView.vue";
-// @ts-ignore
-import LoginView from "../views/Auth.vue";
+
+import Auth from "../views/Auth.vue";
+import { useUserStore } from "../stores/user";
 
 const router = createRouter({
   // @ts-ignore
@@ -12,34 +13,29 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+      meta: {authRequired: true}, 
     },
     {
-      path: "/auth",
-      name: "auth",
-      component: LoginView,
+      path: "/login",
+      name: "login",
+      component: Auth,
     },
-
-    /*     /* path: "/about",
-      name: "about", */
-    // route level code-splitting
-    // this generates a separate chunk (About.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    // @ts-ignore
-    //component: () => import("../views/AboutView.vue"), *
   ],
 });
 
-export default router;
-
-/*router.beforeEach(async (to) => {
+router.beforeEach(async (to) => {
   // redirect to login page if not logged in and trying to access a restricted page
-   const loginUrl = "/login";
+  const loginUrl = "/login";
   const publicPages = [loginUrl];
-  const authRequired = !publicPages.includes(to.path);
-  const $store = useMapStore();
+  const authRequired = !publicPages.includes(to.path.meta);
+  const $store = useUserStore();
 
   if (authRequired) {
     if ($store.user) return;
     return loginUrl;
-  }
-}); */
+  } 
+});
+
+export default router;
+
+

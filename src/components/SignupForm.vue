@@ -39,6 +39,7 @@ const handleSubmit = () => {
       <input
         type="password"
         class="form-control"
+        id="floatingPassword"
         placeholder="Password"
         v-model="password"
         required
@@ -49,11 +50,12 @@ const handleSubmit = () => {
       <input
         type="password"
         class="form-control"
+        id="floatingPassword1"
         placeholder="Repeat password"
         v-model="passwordRepeat"
         required
       />
-      <label for="floatingPassword">Repeat password</label>
+      <label for="floatingPassword1">Repeat password</label>
       <p class="error text-center">
         {{ passwordErr ? "Password don't match" : "" }}
         <!-- how to clear it? -->

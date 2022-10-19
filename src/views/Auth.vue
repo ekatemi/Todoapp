@@ -38,7 +38,7 @@ const toggleSignform = () => {
       </div>
  
       <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-       <div class="card bg-glass px-3 px-sm-5 py-5">
+       <div class="card bg-glass px-3 px-sm-4 px-md-5 py-5">
         <LogInForm v-if="activeLoginForm"></LogInForm>
         <SignupForm v-if="activeSignupForm"></SignupForm>
       <div class="text-center pt-2">

@@ -2,6 +2,17 @@
 import MySearchBar from "../components/MySearchBar.vue";
 import { ref } from "vue";
 
+import { useUserStore } from "../stores/user";
+const userStore = useUserStore(); /* to take data from pinia */
+const handleLogout = () => {
+  if (userStore.user){
+  userStore.signOut()
+  console.log("You are logged out")
+} else console.log("Error sign out")
+};
+
+
+
 // const genres = ["drama", "comedy", "triller", "romance"];
 const listName = "To Watch List";
 const items = ref([
@@ -45,7 +56,7 @@ const saveItem = () => {
             <a href="#" class="nav-link">sort</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Log out</a>
+            <button @click="handleLogout" type="submit" class="nav-link">Log out</button>
           </li>
         </ul>
       </div>
