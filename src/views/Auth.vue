@@ -53,11 +53,7 @@ const toggleSignform = () => {
   </section>
 </template>
 
-
-
 <style scoped>
-
-
 .background-radial-gradient {
   background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
 
