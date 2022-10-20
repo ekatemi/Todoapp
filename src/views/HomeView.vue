@@ -1,9 +1,13 @@
 <script setup>
 import MySearchBar from "../components/MySearchBar.vue";
 import { ref } from "vue";
-
+import { storeToRefs } from "pinia";
 import { useUserStore } from "../stores/user";
 const userStore = useUserStore(); /* to take data from pinia */
+const { user } = storeToRefs(userStore);
+
+console.log(userStore)
+
 const handleLogout = () => {
   if (userStore.user){
   userStore.signOut()
@@ -14,7 +18,7 @@ const handleLogout = () => {
 
 
 // const genres = ["drama", "comedy", "triller", "romance"];
-const listName = "To Watch List";
+const listName = "Hello";
 const items = ref([
   { id: 1, name: "Bladerunner", watched: false },
   { id: 2, name: "Pride and Predjudice", watched: true },

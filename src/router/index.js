@@ -12,8 +12,7 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: HomeView,
-      meta: {authRequired: true}, 
+      component: HomeView, 
     },
     {
       path: "/login",
@@ -27,7 +26,9 @@ router.beforeEach(async (to) => {
   // redirect to login page if not logged in and trying to access a restricted page
   const loginUrl = "/login";
   const publicPages = [loginUrl];
-  const authRequired = !publicPages.includes(to.path.meta);
+  console.log(publicPages )
+  console.log(loginUrl)
+  const authRequired = !publicPages.includes(to.path);
   const $store = useUserStore();
 
   if (authRequired) {
@@ -35,6 +36,7 @@ router.beforeEach(async (to) => {
     return loginUrl;
   } 
 });
+
 
 export default router;
 
