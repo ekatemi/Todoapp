@@ -2,17 +2,16 @@
 import BigButton from "./BigButton.vue";
 import { ref } from "vue";
 import { useUserStore } from "../stores/user.js";
-
 const userStore = useUserStore();
 
 const email = ref("");
 const password = ref("");
 const passwordRepeat = ref("");
 const passwordErr = ref(false);
-
-const handleSubmit = () => {
+// async
+const handleSubmit = async () => {
   if (password.value === passwordRepeat.value) {
-    userStore.signUp(email.value, password.value);
+    await userStore.signUp(email.value, password.value);
     console.log("success sign up");
   } else {
     console.log("password error");
@@ -23,7 +22,7 @@ const handleSubmit = () => {
 
 <template>
   <form @submit.prevent="handleSubmit">
-    <h2 class="my-4 fw-bold text-center" style="color: #002D62">Sign Up</h2>
+    <h2 class="my-4 fw-bold text-center" style="color: #002d62">Sign Up</h2>
     <div class="form-floating mb-4">
       <input
         type="email"

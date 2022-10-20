@@ -1,3 +1,31 @@
 7uZt22lpiY1PLBB0  password
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV3a3FlYXF3ZGxxYmNoYW9heHJnIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjU1MjI3MzgsImV4cCI6MTk4MTA5ODczOH0.XO-np9DwMGgjLygYzdXx1OgHZywhyocqdU2cLE2oKiI
 https://ewkqeaqwdlqbchaoaxrg.supabase.co
+
+
+
+ <div class="container">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark py-3 fixed-top">
+      <a href="#" class="navbar-brand"> Hello, {{ userStore.user.email }}</a>
+      <!-- <MySearchBar></MySearchBar> -->
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navmenu"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a @click="handleLogout" type="submit" class="nav-link">
+              Log out
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
