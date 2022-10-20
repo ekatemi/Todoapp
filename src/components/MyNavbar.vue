@@ -14,39 +14,35 @@ const handleLogout = async () => {
 </script>
 
 <template>
-  <div class="container">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <a href="#" class="navbar-brand">Hello, {{ userStore.user.email }}</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#toggleMobileMenu"
-        aria-controls="toggleMobileMenu"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="toggleMobileMenu">
-        <ul class="navbar-nav">
-          <li>
-            <a href="#" class="nav-link">About</a>
-          </li>
-          <li>
-            <a href="#" class="nav-link">List</a>
-          </li>
-          <li>
-            <a href="#" class="nav-link">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
+  <nav class="navbar navbar-expand-md bg-custom navbar-dark fixed-top px-3">
+    <a href="#" class="navbar-brand"> Hello, {{ userStore.user.email }}</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navmenu"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            @click="handleLogout"
+          >
+            Log out
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </template>
 
 <style scoped>
-section .background {
+.bg-custom {
   background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
 }
 </style>
