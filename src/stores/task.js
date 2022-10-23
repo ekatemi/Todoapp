@@ -19,7 +19,7 @@ export const useTaskStore = defineStore("tasks", {
         .from("tasks")
         .insert([{ user_id: id, title: title }]);
       if (error) throw error;
-      console.log(data);
+      if (data) this.tasks = data;
     },
   },
 });
