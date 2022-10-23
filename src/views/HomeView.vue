@@ -8,7 +8,7 @@ import MyList from "../components/MyList.vue";
 
 <template>
   <MyNavbar></MyNavbar>
-  <!-- <MyList></MyList> -->
+  <MyList></MyList>
 </template>
 
 <style scoped></style>
