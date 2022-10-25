@@ -3,10 +3,8 @@ import { ref, reactive } from "vue";
 import { storeToRefs } from "pinia";
 import { useTaskStore } from "../stores/task";
 import { useUserStore } from "../stores/user";
-
 const taskStore = useTaskStore();
 const userStore = useUserStore();
-
 const { tasks } = storeToRefs(taskStore);
 
 const id = userStore.user.id;
