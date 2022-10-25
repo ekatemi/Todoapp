@@ -8,7 +8,7 @@ const userStore = useUserStore();
 const { tasks } = storeToRefs(taskStore);
 
 const id = userStore.user.id;
-console.log(id);
+
 const watched = taskStore.tasks.is_completed;
 
 const title = ref("");
