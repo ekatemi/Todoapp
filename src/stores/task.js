@@ -33,7 +33,10 @@ export const useTaskStore = defineStore("tasks", {
       if (data) this.tasks = data;
     },
     async deleteTask(id) {
-      const { error } = await supabase.from("tasks").delete().eq("user_id", id);
+      const { data, error } = await supabase
+        .from("tasks")
+        .delete()
+        .match({ id: id });
     },
   },
 });
