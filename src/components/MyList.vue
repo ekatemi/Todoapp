@@ -53,7 +53,7 @@ const deleteTask = async (taskId) => {
         <button
           @click="deleteTask(task.id)"
           type="button"
-          class="btn btn-outline-dark input-group-append"
+          class="btn btn-outline-dark input-group-append float-end"
         >
           Delete
         </button>
