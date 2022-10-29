@@ -8,11 +8,9 @@ const userStore = useUserStore();
 const { tasks } = storeToRefs(taskStore);
 
 const id = userStore.user.id;
-
-const watched = taskStore.tasks.is_completed;
+taskStore.fetchTasks(id);
 
 const title = ref("");
-taskStore.fetchTasks(id);
 
 const addTask = async () => {
   console.log(id, title.value);
@@ -21,9 +19,15 @@ const addTask = async () => {
   title.value = "";
 };
 
-const deleteTask = async () => {
-  await taskStore.deleteTask();
+const deleteTask = async (taskId) => {
+  await taskStore.deleteTask(taskId);
+  await taskStore.fetchTasks(id);
 };
+
+/* const updateTask = async (taskId) => {
+  await taskStore.updateTask(taskId, true);
+  await taskStore.fetchTasks(id);
+}; */
 </script>
 
 <template>
@@ -34,20 +38,20 @@ const deleteTask = async () => {
         v-for="task in tasks"
         :key="task.id"
         class="list-group-item"
-        :class="{ watched: task.watched }"
+        :class="{ watched: task.is_complete }"
       >
         <input
-          v-model="task.watched"
+          @click=""
           class="form-check-input me-3"
           type="checkbox"
-          value=""
+          value="task.is_complete"
           id="firstCheckbox"
         />
         <label class="form-check-label" for="firstCheckbox">
           {{ task.title }}
         </label>
         <button
-          @click="deleteTask"
+          @click="deleteTask(task.id)"
           type="button"
           class="btn btn-outline-dark input-group-append"
         >
