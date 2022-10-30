@@ -1,6 +1,7 @@
 <script setup>
 import { ref, reactive } from "vue";
 import { storeToRefs } from "pinia";
+import BigButtonVue from "./BigButton.vue";
 import { useTaskStore } from "../stores/task";
 import { useUserStore } from "../stores/user";
 const taskStore = useTaskStore();
@@ -25,43 +26,24 @@ const deleteTask = async (taskId) => {
   await taskStore.fetchTasks(id);
 };
 
+const deleteAll = async (id) => {
+  await taskStore.deleteTask(id);
+};
+
 const toggleCompleted = async (taskId) => {
   isCompleted.value = !isCompleted.value;
   await taskStore.toggleCompleted(taskId, isCompleted.value);
   await taskStore.fetchTasks(id);
 };
+/* const editTitle = async (taskId) => {
+  await taskStore.editTitle(taskId, title.value);
+  await taskStore.fetchTasks(id);
+}; */
 </script>
 
 <template>
   <div class="container pt-5">
-    <p class="pt-5" v-if="!tasks.length">The list is empty, write something!</p>
-    <ul class="list-group list-group-flush mt-5">
-      <li
-        v-for="task in tasks"
-        :key="task.id"
-        class="list-group-item"
-        :class="{ watched: task.is_complete }"
-      >
-        <input
-          @click="toggleCompleted(task.id)"
-          class="form-check-input me-3"
-          type="checkbox"
-          v-model="task.is_complete"
-          id="firstCheckbox"
-        />
-        <label class="form-check-label" for="firstCheckbox">
-          {{ task.title }} completed: {{ task.is_complete }}
-        </label>
-        <button
-          @click="deleteTask(task.id)"
-          type="button"
-          class="btn btn-outline-dark input-group-append float-end"
-        >
-          Delete
-        </button>
-      </li>
-    </ul>
-    <form @submit.prevent="addTask" class="input-new-item">
+    <form @submit.prevent="addTask" class="input-new-item pt-5">
       <div class="input-group mb-3">
         <input
           v-model.trim="title"
@@ -72,6 +54,39 @@ const toggleCompleted = async (taskId) => {
         <button class="btn btn-outline-dark" id="button-addon2">Add</button>
       </div>
     </form>
+    <p class="pt-5" v-if="!tasks.length">The list is empty, write something!</p>
+    <ul class="list-group list-group-flush">
+      <li
+        v-for="task in tasks"
+        :key="task.id"
+        class="list-group-item"
+        :class="{ watched: task.is_complete }"
+      >
+        <input
+          @change="toggleCompleted(task.id, task.is_complete)"
+          class="form-check-input me-3"
+          type="checkbox"
+          value="true"
+          v-model="task.is_complete"
+          id="firstCheckbox"
+        />
+        <label
+          @dblclick="editTitle(task.title)"
+          class="form-check-label"
+          for="firstCheckbox"
+        >
+          {{ task.title }} watched: {{ task.is_complete }}
+        </label>
+        <button
+          @click="deleteTask(task.id)"
+          type="button"
+          class="btn btn-outline-dark input-group-append float-end"
+        >
+          Delete
+        </button>
+      </li>
+    </ul>
+    <BigButtonVue @click="deleteAll(tasks)">Delete all</BigButtonVue>
   </div>
 </template>
 
