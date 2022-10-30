@@ -11,7 +11,7 @@ export const useTaskStore = defineStore("tasks", {
         .from("tasks")
         .select("*")
         .eq("user_id", id)
-        .order("id", { ascending: true });
+        .order("id", { ascending: false });
 
       if (error) throw error;
       if (data) this.tasks = data;

@@ -12,6 +12,7 @@ taskStore.fetchTasks(id);
 
 const title = ref("");
 const isCompleted = ref(false);
+console.log(isCompleted);
 
 const addTask = async () => {
   await taskStore.createTask(id, title.value);
@@ -45,6 +46,7 @@ const toggleCompleted = async (taskId) => {
           @click="toggleCompleted(task.id)"
           class="form-check-input me-3"
           type="checkbox"
+          v-model="task.is_complete"
           id="firstCheckbox"
         />
         <label class="form-check-label" for="firstCheckbox">
