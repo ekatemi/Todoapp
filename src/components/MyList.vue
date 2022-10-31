@@ -42,7 +42,7 @@ const deleteCompleted = async () => {
 </script>
 
 <template>
-  <div class="container pt-5">
+  <div class="container py-5 h-100">
     <form @submit.prevent="addTask" class="input-new-item pt-5">
       <div class="input-group mb-3">
         <input
@@ -70,7 +70,7 @@ const deleteCompleted = async () => {
           v-model="task.is_complete"
           id="firstCheckbox"
         />
-        <label> {{ task.title }} </label>
+        <label v-cloak> {{ task.title }} </label>
         <button
           @click="deleteTask(task.id)"
           type="button"
@@ -87,5 +87,9 @@ const deleteCompleted = async () => {
 <style scoped>
 .watched {
   opacity: 0.4;
+}
+
+[v-cloak] {
+  display: none;
 }
 </style>
