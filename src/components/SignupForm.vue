@@ -7,17 +7,18 @@ const userStore = useUserStore();
 const email = ref("");
 const password = ref("");
 const passwordRepeat = ref("");
-const passwordErr = ref(false);
+const passwordErr = ref(null);
 const successSignupMsg = ref(false);
 // async
 const handleSubmit = async () => {
   if (password.value === passwordRepeat.value) {
     await userStore.signUp(email.value, password.value);
-    console.log("success sign up");
     successSignupMsg.value = true;
   } else {
-    console.log("password error");
-    passwordErr.value = true;
+    passwordErr.value = "Passwords do not match";
+    setTimeout(() => {
+      passwordErr.value = null;
+    }, 5000);
   }
 };
 </script>
@@ -58,8 +59,7 @@ const handleSubmit = async () => {
       />
       <label for="floatingPassword1">Repeat password</label>
       <p class="error text-center">
-        {{ passwordErr ? "Password don't match" : "" }}
-        <!-- how to clear it? -->
+        {{ passwordErr }}
       </p>
       <p>
         {{ successSignupMsg ? "Please, check your email and confirm it" : "" }}

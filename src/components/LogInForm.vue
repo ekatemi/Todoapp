@@ -10,13 +10,20 @@ const userStore = useUserStore(); /* to take data from pinia */
 console.log(userStore);
 const email = ref("");
 const password = ref("");
+const errorMsg = ref(null);
 
 const handleLogin = async () => {
-  await userStore.signIn(email.value, password.value);
-  console.log("user logged in");
-  console.log(userStore);
-  if (userStore.user) {
-    router.push("/");
+  try {
+    await userStore.signIn(email.value, password.value);
+    if (userStore.user) {
+      router.push("/");
+    }
+  } catch (error) {
+    // alert(error.message);
+    errorMsg.value = "The password is not correct";
+    setTimeout(() => {
+      errorMsg.value = null;
+    }, 2000);
   }
 };
 </script>
@@ -46,6 +53,13 @@ const handleLogin = async () => {
       />
       <label for="floatingPassword">Password</label>
     </div>
+    <p class="error">{{ errorMsg }}</p>
     <BigButton>Login</BigButton>
   </form>
 </template>
+
+<style scoped>
+.error {
+  color: red;
+}
+</style>
