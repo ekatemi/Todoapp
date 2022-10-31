@@ -13,7 +13,6 @@ taskStore.fetchTasks(id);
 
 const title = ref("");
 const isCompleted = ref(false);
-console.log(isCompleted);
 
 const addTask = async () => {
   await taskStore.createTask(id, title.value);
@@ -26,15 +25,16 @@ const deleteTask = async (taskId) => {
   await taskStore.fetchTasks(id);
 };
 
-const deleteAll = async (id) => {
-  await taskStore.deleteTask(id);
-};
-
 const toggleCompleted = async (taskId) => {
   isCompleted.value = !isCompleted.value;
   await taskStore.toggleCompleted(taskId, isCompleted.value);
   await taskStore.fetchTasks(id);
 };
+const deleteCompleted = async () => {
+  await taskStore.deleteCompleted(id);
+  await taskStore.fetchTasks(id);
+};
+
 /* const editTitle = async (taskId) => {
   await taskStore.editTitle(taskId, title.value);
   await taskStore.fetchTasks(id);
@@ -70,13 +70,7 @@ const toggleCompleted = async (taskId) => {
           v-model="task.is_complete"
           id="firstCheckbox"
         />
-        <label
-          @dblclick="editTitle(task.title)"
-          class="form-check-label"
-          for="firstCheckbox"
-        >
-          {{ task.title }} watched: {{ task.is_complete }}
-        </label>
+        <label> {{ task.title }} </label>
         <button
           @click="deleteTask(task.id)"
           type="button"
@@ -86,7 +80,7 @@ const toggleCompleted = async (taskId) => {
         </button>
       </li>
     </ul>
-    <BigButtonVue @click="deleteAll(tasks)">Delete all</BigButtonVue>
+    <BigButtonVue @click="deleteCompleted()">Delete completed</BigButtonVue>
   </div>
 </template>
 

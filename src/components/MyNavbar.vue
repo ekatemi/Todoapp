@@ -16,14 +16,14 @@ const handleLogout = async () => {
 <template>
   <nav class="navbar navbar-expand-md bg-custom navbar-dark fixed-top px-3">
     <a href="#" class="navbar-brand"> Hello, {{ userStore.user.email }}</a>
-    <button
+    <!-- <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navmenu"
     >
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
 
     <div class="navbar-collapse" id="navmenu">
       <ul class="navbar-nav ms-auto">
