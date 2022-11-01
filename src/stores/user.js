@@ -12,10 +12,15 @@ export const useUserStore = defineStore("user", {
       this.user = user;
     },
     async signUp(email, password) {
-      const { user, error } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-      });
+      const { user, error } = await supabase.auth.signUp(
+        {
+          email: email,
+          password: password,
+        },
+        {
+          redirectTo: "https://katia-app.netlify.app/email-confirmation",
+        }
+      );
       if (error) throw error;
       if (user) this.user = user;
     },
