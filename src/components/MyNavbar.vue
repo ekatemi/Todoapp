@@ -26,7 +26,11 @@ const toggleHamburgerMenu = () => {
         >TodoApp <br /><span>Hello, {{ userStore.user.email }}</span></a
       >
 
-      <ul class="nav-menu" :class="[{ active: isActive }]">
+      <ul
+        class="nav-menu"
+        :class="[{ active: isActive }]"
+        style="z-index: 1000"
+      >
         <li class="nav-item">
           <RouterLink to="/" @click="handleLogout" class="nav-link pt-3">
             Log out
