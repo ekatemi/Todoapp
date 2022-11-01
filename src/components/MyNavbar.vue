@@ -52,7 +52,7 @@ const toggleHamburgerMenu = () => {
 
 <style scoped>
 header {
-  background: linear-gradient(to right, #a615a4 0%, #2575fc 100%);
+  background: ;
 }
 
 li {
@@ -137,3 +137,4 @@ a {
   }
 }
 </style>
+linear-gradient(to right, #a615a4 0%, #2575fc 100%);
