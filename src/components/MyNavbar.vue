@@ -22,7 +22,10 @@ const toggleHamburgerMenu = () => {
 <template>
   <header>
     <nav class="navbar">
-      <a href="#" class="navbar-brand">TodoApp</a>
+      <a href="#" class="navbar-brand fw-bold nav-link"
+        >TodoApp <br /><span>Hello, {{ userStore.user.email }}</span></a
+      >
+
       <ul class="nav-menu" :class="[{ active: isActive }]">
         <li class="nav-item">
           <RouterLink to="/" @click="handleLogout" class="nav-link pt-3">
@@ -56,7 +59,7 @@ li {
 a {
   color: #fff;
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .navbar {
