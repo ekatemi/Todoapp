@@ -39,7 +39,7 @@ router.beforeEach(async (to) => {
 
   if (authRequired) {
     if ($store.user) return;
-    return publicPages;
+    return loginUrl;
   }
 });
 
