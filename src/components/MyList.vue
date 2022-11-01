@@ -43,7 +43,7 @@ const deleteCompleted = async () => {
 <template>
   <div class="container py-5 h-100 min-vw-50">
     <form @submit.prevent="addTask" class="input-new-item pt-5">
-      <div class="input-group mb-3">
+      <div class="input-group mb-2">
         <input
           v-model.trim="title"
           type="text"
@@ -53,7 +53,22 @@ const deleteCompleted = async () => {
         <button class="btn btn-outline-dark" id="button-addon2">Add</button>
       </div>
     </form>
-    <p class="pt-5" v-if="!tasks.length">The list is empty, write something!</p>
+    <div
+      class="container d-flex justify-content-around align-items-center py-3"
+      v-if="!tasks.length"
+    >
+      <img
+        class="d-flex"
+        src="src\assets\pictures\Lisa.png"
+        alt="Lisa"
+        style="width: 30%"
+      />
+      <div class="d-flex">
+        <h3 class="fw-bold" style="color: blueviolet">
+          It´s empty, write something here!
+        </h3>
+      </div>
+    </div>
     <ul v-cloak class="list-group list-group-flush">
       <li
         v-for="task in tasks"
@@ -69,10 +84,11 @@ const deleteCompleted = async () => {
           id="firstCheckbox"
         />
         <label v-cloak> {{ task.title }} </label>
+
         <button
           @click="deleteTask(task.id)"
           type="button"
-          class="btn btn-outline-dark input-group-append float-end"
+          class="btn btn-outline-dark rounded-pill input-group-append float-end"
         >
           Delete
         </button>
