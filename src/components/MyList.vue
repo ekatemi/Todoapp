@@ -25,9 +25,8 @@ const deleteTask = async (taskId) => {
   await taskStore.fetchTasks(id);
 };
 
-const toggleCompleted = async (taskId) => {
-  isCompleted.value = !isCompleted.value;
-  await taskStore.toggleCompleted(taskId, isCompleted.value);
+const toggleCompleted = async (task) => {
+  await taskStore.toggleCompleted(task.id, task.is_complete);
   await taskStore.fetchTasks(id);
 };
 const deleteCompleted = async () => {
@@ -63,7 +62,7 @@ const deleteCompleted = async () => {
         :class="{ watched: task.is_complete }"
       >
         <input
-          @change="toggleCompleted(task.id)"
+          @change="toggleCompleted(task)"
           class="form-check-input me-3"
           type="checkbox"
           v-model="task.is_complete"
