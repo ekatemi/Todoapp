@@ -59,7 +59,7 @@ const deleteCompleted = async () => {
     >
       <img
         class="d-flex"
-        src="src\assets\pictures\Lisa.png"
+        src="../assets/pictures/Lisa.png"
         alt="Lisa"
         style="width: 30%"
       />
