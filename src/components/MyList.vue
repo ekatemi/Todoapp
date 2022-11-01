@@ -55,7 +55,7 @@ const deleteCompleted = async () => {
       </div>
     </form>
     <p class="pt-5" v-if="!tasks.length">The list is empty, write something!</p>
-    <ul class="list-group list-group-flush">
+    <ul v-cloak class="list-group list-group-flush">
       <li
         v-for="task in tasks"
         :key="task.id"
@@ -63,10 +63,9 @@ const deleteCompleted = async () => {
         :class="{ watched: task.is_complete }"
       >
         <input
-          @change="toggleCompleted(task.id, task.is_complete)"
+          @change="toggleCompleted(task.id)"
           class="form-check-input me-3"
           type="checkbox"
-          value="true"
           v-model="task.is_complete"
           id="firstCheckbox"
         />
