@@ -42,7 +42,7 @@ const deleteCompleted = async () => {
 </script>
 
 <template>
-  <div class="container py-5 h-100">
+  <div class="container py-5 h-100 min-vw-50">
     <form @submit.prevent="addTask" class="input-new-item pt-5">
       <div class="input-group mb-3">
         <input

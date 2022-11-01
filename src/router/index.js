@@ -30,7 +30,8 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   // redirect to login page if not logged in and trying to access a restricted page
   const loginUrl = "/login";
-  const publicPages = [loginUrl];
+  const mailConfirmUrl = "/email-confirmation";
+  const publicPages = [loginUrl, mailConfirmUrl];
   console.log(publicPages);
   console.log(loginUrl);
   const authRequired = !publicPages.includes(to.path);
