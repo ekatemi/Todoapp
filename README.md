@@ -27,7 +27,7 @@ It was all big challenge for me, first time creating an app by myself, interacti
 
 ## Live demo
 
-[Live demo](https://katia-app.netlify.app/login)
+🔗[Live demo](https://katia-app.netlify.app/login)
 
 ## Recommended IDE Setup
 
