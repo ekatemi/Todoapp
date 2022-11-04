@@ -2,14 +2,13 @@
 import { ref } from "vue";
 import BigButton from "../components/BigButton.vue";
 import LogInForm from "../components/LogInForm.vue";
+import LoginText from "../components/LoginText.vue";
 import SignuoForm from "../components/SignupForm.vue";
 import SignupForm from "../components/SignupForm.vue";
-
 const activeSignupForm = ref(false);
 const activeLoginForm = ref(true);
 const btnMsg = ref("Sign up");
 const msg = ref("Don´t have an account yet?");
-
 const toggleSignform = () => {
   activeSignupForm.value = !activeSignupForm.value;
   activeLoginForm.value = !activeLoginForm.value;
@@ -24,24 +23,12 @@ const toggleSignform = () => {
 </script>
 
 <template>
-  <section class="background-radial-gradient overflow-hidden">
-    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-      <div class="row gx-lg-5 align-items-center mb-5">
-        <div class="col-lg-6 mb-5 mb-lg-0">
-          <h1
-            class="my-5 display-5 fw-bold ls-tight"
-            style="color: hsl(218, 81%, 95%)"
-          >
-            The best app <br />
-            <span style="color: hsl(218, 81%, 75%)">to track your things</span>
-          </h1>
-          <p class="mb-4 opacity-80" style="color: hsl(218, 81%, 85%)">
-            Save, sort, edit your lists of tasks
-          </p>
-        </div>
-
-        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-          <div class="card bg-glass px-3 px-sm-4 px-md-5 py-5">
+  <section class="background-radial-gradient overflow-hidden p-4">
+    <div class="container text-center text-lg-start mt-sm-2 mt-md-3 mt-lg-5">
+      <div class="row gx-lg-5 align-items-center">
+        <LoginText></LoginText>
+        <div class="col-lg-6 mb-3 mb-lg-0 position-relative">
+          <div class="card bg-glass px-2 px-md-4 px-lg-5 py-4">
             <LogInForm v-if="activeLoginForm"></LogInForm>
             <SignupForm v-if="activeSignupForm"></SignupForm>
             <div class="text-center pt-2">
@@ -64,7 +51,6 @@ const toggleSignform = () => {
   background-color: hsla(0, 0%, 100%, 0.95) !important;
   backdrop-filter: saturate(200%) blur(25px);
 }
-
 section {
   width: 100vw;
   min-height: 100vh;

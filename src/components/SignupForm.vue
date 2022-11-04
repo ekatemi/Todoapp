@@ -25,33 +25,41 @@ const handleSubmit = async () => {
 
 <template>
   <form @submit.prevent="handleSubmit">
-    <h2 class="my-4 fw-bold text-center" style="color: #002d62">Sign Up</h2>
-    <div class="form-floating mb-4">
+    <h2 class="mb-3 fw-bold text-center" style="color: #002d62">Sign Up</h2>
+    <div class="form-floating mb-3">
       <input
         type="email"
-        class="form-control"
+        class="form-control .form-control-sm"
         id="floatingInput"
-        placeholder="name@example.com"
+        placeholder=".form-control-sm"
         v-model="email"
+        aria-describedby="emailHelp"
         required
       />
       <label for="floatingInput">Email address</label>
+      <div id="emailHelp" class="form-text">
+        We will never share your email with anybody
+      </div>
     </div>
-    <div class="form-floating mb-4">
+    <div class="form-floating mb-3">
       <input
         type="password"
-        class="form-control"
+        class="form-control form-control-sm"
         id="floatingPassword"
-        placeholder="Password"
+        placeholder=".form-control-sm"
+        aria-describedby="passwordHelp"
         v-model="password"
         required
       />
       <label for="floatingPassword">Password</label>
+      <div id="passwordHelp" class="form-text">
+        Password should be minimum 6 characters long
+      </div>
     </div>
-    <div class="form-floating mb-4">
+    <div class="form-floating mb-3">
       <input
         type="password"
-        class="form-control"
+        class="form-control form-control-sm"
         id="floatingPassword1"
         placeholder="Repeat password"
         v-model="passwordRepeat"

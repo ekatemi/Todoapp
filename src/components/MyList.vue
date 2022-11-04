@@ -12,7 +12,7 @@ const id = userStore.user.id;
 taskStore.fetchTasks(id);
 
 const title = ref("");
-const isCompleted = ref(false);
+const isEdited = ref(false);
 
 const addTask = async () => {
   await taskStore.createTask(id, title.value);
@@ -34,14 +34,19 @@ const deleteCompleted = async () => {
   await taskStore.fetchTasks(id);
 };
 
-/* const editTitle = async (taskId) => {
-  await taskStore.editTitle(taskId, title.value);
+const editTitle = async (task) => {
+  await taskStore.editTitle(task.id, task.title);
+  isEdited.value = !isEdited.value;
   await taskStore.fetchTasks(id);
-}; */
+};
+
+const onCancel = () => {
+  const isEdited = true;
+};
 </script>
 
 <template>
-  <div class="container py-5 h-100 min-vw-50">
+  <div class="container py-5 h-100 min-vw-50 px-lg-5">
     <form @submit.prevent="addTask" class="input-new-item pt-5">
       <div class="input-group mb-2">
         <input
@@ -76,22 +81,49 @@ const deleteCompleted = async () => {
         class="list-group-item"
         :class="{ watched: task.is_complete }"
       >
-        <input
-          @change="toggleCompleted(task)"
-          class="form-check-input me-3"
-          type="checkbox"
-          v-model="task.is_complete"
-          id="firstCheckbox"
-        />
-        <label v-cloak> {{ task.title }} </label>
-
-        <button
-          @click="deleteTask(task.id)"
-          type="button"
-          class="btn btn-outline-dark rounded-pill input-group-append float-end"
+        <div v-if="!isEdited">
+          <input
+            @change="toggleCompleted(task)"
+            class="form-check-input me-3"
+            type="checkbox"
+            v-model="task.is_complete"
+            id="firstCheckbox"
+          />
+          <label v-cloak @dblclick="isEdited = !isEdited">
+            {{ task.title }}
+          </label>
+          <button
+            @click="deleteTask(task.id)"
+            type="button"
+            class="btn btn-outline-dark rounded-pill input-group-append float-end"
+          >
+            Delete
+          </button>
+        </div>
+        <form
+          v-else="isEdited"
+          class="input-group-text"
+          @submit.prevent="editTitle(task)"
         >
-          Delete
-        </button>
+          <div>
+            <input
+              :id="id"
+              type="text"
+              autocomplete="off"
+              v-model.lazy.trim="task.title"
+            />
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn" @click="onCancel">
+              Cancel
+              <span class="visually-hidden">editing {{ task.title }}</span>
+            </button>
+            <button type="submit" class="btn btn__primary">
+              Save
+              <span class="visually-hidden">edit for {{ task.title }}</span>
+            </button>
+          </div>
+        </form>
       </li>
     </ul>
     <BigButtonVue @click="deleteCompleted()">Delete completed</BigButtonVue>

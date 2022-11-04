@@ -30,13 +30,13 @@ const handleLogin = async () => {
 
 <template>
   <form @submit.prevent="handleLogin">
-    <h2 class="my-4 fw-bold text-center" style="color: #002d62">Log in</h2>
+    <h2 class="mb-3 fw-bold text-center" style="color: #002d62">Log in</h2>
     <div class="form-floating mb-4">
       <input
         type="email"
-        class="form-control"
+        class="form-control form-control-sm"
         id="floatingInput"
-        placeholder="name@example.com"
+        placeholder=".form-control-sm"
         v-model="email"
         required
       />
@@ -45,9 +45,9 @@ const handleLogin = async () => {
     <div class="form-floating mb-4">
       <input
         type="password"
-        class="form-control"
+        class="form-control form-control-sm"
         id="floatingPassword"
-        placeholder="Password"
+        placeholder=".form-control-sm"
         v-model="password"
         required
       />
