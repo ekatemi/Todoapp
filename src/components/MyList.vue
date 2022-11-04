@@ -12,6 +12,8 @@ const { tasks } = storeToRefs(taskStore);
 const id = userStore.user.id;
 taskStore.fetchTasks(id);
 const title = ref("");
+
+console.log(title);
 const isEdited = ref(false);
 
 const addTask = async () => {
@@ -97,12 +99,8 @@ const onCancel = async () => {
             v-model="task.is_complete"
             id="firstCheckbox"
           />
-          <label
-            class="text-wrap"
-            v-cloak
-            @click="editTitle(task.id, task.title)"
-          >
-            {{ task.title }} {{ task.id }}
+          <label class="text-wrap" v-cloak @click="editTitle()">
+            {{ task.title }}
           </label>
 
           <button

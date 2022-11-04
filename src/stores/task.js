@@ -32,7 +32,7 @@ export const useTaskStore = defineStore("tasks", {
       if (error) throw error;
     },
     async editTitle(id, title) {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("tasks")
         .update({ title: title })
         .eq("id", id)
