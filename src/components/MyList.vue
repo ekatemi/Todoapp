@@ -41,7 +41,7 @@ const editTitle = async (task) => {
 };
 
 const onCancel = () => {
-  const isEdited = true;
+  isEdited.value = false;
 };
 </script>
 
