@@ -53,7 +53,7 @@ const onCancel = async () => {
         <input
           v-model.trim="title"
           type="text"
-          class="form-control"
+          class="form-control form-control-lg"
           placeholder="Add new item"
         />
         <button class="btn btn-outline-dark" id="button-addon2">Add</button>
