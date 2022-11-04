@@ -2,6 +2,7 @@
 import { ref, reactive } from "vue";
 import { storeToRefs } from "pinia";
 import BigButtonVue from "./BigButton.vue";
+import CancelIcon from "../assets/icons/CancelIcon.vue";
 import { useTaskStore } from "../stores/task";
 import { useUserStore } from "../stores/user";
 const taskStore = useTaskStore();
@@ -10,9 +11,8 @@ const { tasks } = storeToRefs(taskStore);
 
 const id = userStore.user.id;
 taskStore.fetchTasks(id);
-
 const title = ref("");
-const isEdited = ref("");
+const isEdited = ref(false);
 
 const addTask = async () => {
   await taskStore.createTask(id, title.value);
@@ -29,14 +29,15 @@ const toggleCompleted = async (task) => {
   await taskStore.toggleCompleted(task.id, task.is_complete);
   await taskStore.fetchTasks(id);
 };
+
 const deleteCompleted = async () => {
   await taskStore.deleteCompleted(id);
   await taskStore.fetchTasks(id);
 };
 
 const editTitle = async (task) => {
-  await taskStore.editTitle(task.id, task.title);
   isEdited.value = !isEdited.value;
+  await taskStore.editTitle(task.id, task.title);
   await taskStore.fetchTasks(id);
 };
 
@@ -56,7 +57,13 @@ const onCancel = async () => {
           class="form-control form-control-lg"
           placeholder="Add new item"
         />
-        <button class="btn btn-outline-dark" id="button-addon2">Add</button>
+        <button
+          :disabled="title.length === 0"
+          class="btn btn-outline-dark"
+          id="button-addon2"
+        >
+          Add
+        </button>
       </div>
     </form>
     <div
@@ -80,7 +87,7 @@ const onCancel = async () => {
         v-for="task in tasks"
         :key="task.id"
         class="list-group-item"
-        :class="{ watched: task.is_complete }"
+        :class="{ completed: task.is_complete }"
       >
         <div v-if="!isEdited">
           <input
@@ -90,8 +97,12 @@ const onCancel = async () => {
             v-model="task.is_complete"
             id="firstCheckbox"
           />
-          <label class="text-wrap" v-cloak @dblclick="isEdited = !isEdited">
-            {{ task.title }}
+          <label
+            class="text-wrap"
+            v-cloak
+            @click="editTitle(task.id, task.title)"
+          >
+            {{ task.title }} {{ task.id }}
           </label>
 
           <button
@@ -102,22 +113,18 @@ const onCancel = async () => {
             Delete
           </button>
         </div>
-        <form
-          v-else="isEdited"
-          class="input-group-text"
-          @submit.prevent="editTitle(task)"
-        >
-          <div>
-            <input
-              class="form-control"
-              type="text"
-              autocomplete="off"
-              v-model.lazy.trim="task.title"
-            />
-          </div>
+        <form v-else class="input-group-text" @submit.prevent="editTitle(task)">
+          <input
+            class="form-control"
+            type="text"
+            autocomplete="off"
+            v-model.trim="task.title"
+          />
+
           <div class="btn-group">
             <button type="button" class="btn" @click="onCancel">
-              Cancel
+              <CancelIcon></CancelIcon>
+
               <span class="visually-hidden">editing {{ task.title }}</span>
             </button>
             <button type="submit" class="btn">
@@ -133,11 +140,18 @@ const onCancel = async () => {
 </template>
 
 <style scoped>
-.watched {
+.completed {
   opacity: 0.4;
 }
-
 [v-cloak] {
   display: none;
+}
+
+#button-addon2 {
+  background: linear-gradient(
+    90deg,
+    rgba(253, 29, 29, 1) 44%,
+    rgba(252, 176, 69, 1) 100%
+  );
 }
 </style>
