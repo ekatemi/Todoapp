@@ -12,7 +12,7 @@ const id = userStore.user.id;
 taskStore.fetchTasks(id);
 
 const title = ref("");
-const isEdited = ref(false);
+const isEdited = ref("");
 
 const addTask = async () => {
   await taskStore.createTask(id, title.value);
@@ -40,7 +40,8 @@ const editTitle = async (task) => {
   await taskStore.fetchTasks(id);
 };
 
-const onCancel = () => {
+const onCancel = async () => {
+  await taskStore.fetchTasks(id);
   isEdited.value = false;
 };
 </script>
@@ -89,9 +90,10 @@ const onCancel = () => {
             v-model="task.is_complete"
             id="firstCheckbox"
           />
-          <label v-cloak @dblclick="isEdited = !isEdited">
+          <label class="text-wrap" v-cloak @dblclick="isEdited = !isEdited">
             {{ task.title }}
           </label>
+
           <button
             @click="deleteTask(task.id)"
             type="button"
@@ -107,7 +109,7 @@ const onCancel = () => {
         >
           <div>
             <input
-              :id="id"
+              class="form-control"
               type="text"
               autocomplete="off"
               v-model.lazy.trim="task.title"
@@ -118,7 +120,7 @@ const onCancel = () => {
               Cancel
               <span class="visually-hidden">editing {{ task.title }}</span>
             </button>
-            <button type="submit" class="btn btn__primary">
+            <button type="submit" class="btn">
               Save
               <span class="visually-hidden">edit for {{ task.title }}</span>
             </button>

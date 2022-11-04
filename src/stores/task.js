@@ -11,7 +11,7 @@ export const useTaskStore = defineStore("tasks", {
         .from("tasks")
         .select("*")
         .eq("user_id", id)
-        .order("id", { ascending: false });
+        .order("id", { ascending: true });
 
       if (error) throw error;
       if (data) this.tasks = data;
@@ -38,7 +38,6 @@ export const useTaskStore = defineStore("tasks", {
         .eq("id", id)
         .select();
       if (error) throw error;
-      if (data) this.tasks = data;
     },
     async deleteTask(id) {
       const { data, error } = await supabase
