@@ -1,69 +1,142 @@
 <script setup>
-import { ref } from "vue";
-import BigButton from "../components/BigButton.vue";
-import LogInForm from "../components/LogInForm.vue";
-import SignuoForm from "../components/SignupForm.vue";
-import SignupForm from "../components/SignupForm.vue";
-const activeSignupForm = ref(false);
-const activeLoginForm = ref(true);
-const btnMsg = ref("Sign up");
-const msg = ref("Don´t have an account yet?");
-const toggleSignform = () => {
-  activeSignupForm.value = !activeSignupForm.value;
-  activeLoginForm.value = !activeLoginForm.value;
-  if (activeSignupForm.value) {
-    btnMsg.value = "Log in";
-    msg.value = "Registered user?";
-  } else {
-    btnMsg.value = "Sign up";
-    msg.value = "Don´t have an account yet?";
-  }
+import { ref, reactive } from "vue";
+import { storeToRefs } from "pinia";
+import BigButtonVue from "./BigButton.vue";
+import CancelIcon from "../assets/icons/CancelIcon.vue";
+import { useTaskStore } from "../stores/task";
+import { useUserStore } from "../stores/user";
+const taskStore = useTaskStore();
+const userStore = useUserStore();
+const { tasks } = storeToRefs(taskStore);
+const id = userStore.user.id;
+taskStore.fetchTasks(id);
+const title = ref("");
+console.log(title);
+const isEdited = ref(false);
+const addTask = async () => {
+  await taskStore.createTask(id, title.value);
+  await taskStore.fetchTasks(id);
+  title.value = "";
+};
+const deleteTask = async (taskId) => {
+  await taskStore.deleteTask(taskId);
+  await taskStore.fetchTasks(id);
+};
+const toggleCompleted = async (task) => {
+  await taskStore.toggleCompleted(task.id, task.is_complete);
+  await taskStore.fetchTasks(id);
+};
+const deleteCompleted = async () => {
+  await taskStore.deleteCompleted(id);
+  await taskStore.fetchTasks(id);
+};
+const editTitle = async (task) => {
+  isEdited.value = !isEdited.value;
+  await taskStore.editTitle(task.id, task.title);
+  await taskStore.fetchTasks(id);
+};
+const onCancel = async () => {
+  await taskStore.fetchTasks(id);
+  isEdited.value = false;
 };
 </script>
 
 <template>
-  <section class="background-radial-gradient overflow-hidden">
-    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-      <div class="row gx-lg-5 align-items-center mb-5">
-        <div class="col-lg-6 mb-5 mb-lg-0">
-          <h1
-            class="my-5 display-5 fw-bold ls-tight"
-            style="color: hsl(218, 81%, 95%)"
-          >
-            The best app <br />
-            <span style="color: hsl(218, 81%, 75%)">to track your things</span>
-          </h1>
-          <p class="mb-4 opacity-80" style="color: hsl(218, 81%, 85%)">
-            Save, sort, edit your lists of tasks
-          </p>
-        </div>
-
-        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-          <div class="card bg-glass px-3 px-sm-4 px-md-5 py-5">
-            <LogInForm v-if="activeLoginForm"></LogInForm>
-            <SignupForm v-if="activeSignupForm"></SignupForm>
-            <div class="text-center pt-2">
-              <hr class="hr" />
-              <p>{{ msg }}</p>
-            </div>
-            <BigButton @click="toggleSignform">{{ btnMsg }}</BigButton>
-          </div>
-        </div>
+  <div class="container py-5 h-100 min-vw-50 px-lg-5">
+    <form @submit.prevent="addTask" class="input-new-item pt-5">
+      <div class="input-group mb-2">
+        <input
+          v-model.trim="title"
+          type="text"
+          class="form-control form-control-lg"
+          placeholder="Add new item"
+        />
+        <button
+          :disabled="title.length === 0"
+          class="btn btn-outline-dark"
+          id="button-addon2"
+        >
+          Add
+        </button>
+      </div>
+    </form>
+    <div
+      class="container d-flex justify-content-around align-items-center py-3"
+      v-if="!tasks.length"
+    >
+      <img
+        class="d-flex"
+        src="../assets/pictures/Lisa.png"
+        alt="Lisa"
+        style="width: 30%"
+      />
+      <div class="d-flex">
+        <h3 class="fw-bold" style="color: blueviolet">
+          It´s empty, write something here!
+        </h3>
       </div>
     </div>
-  </section>
+    <ul v-cloak class="list-group list-group-flush">
+      <li
+        v-for="task in tasks"
+        :key="task.id"
+        class="list-group-item"
+        :class="{ completed: task.is_complete }"
+      >
+        <div v-if="!isEdited">
+          <input
+            @change="toggleCompleted(task)"
+            class="form-check-input me-3"
+            type="checkbox"
+            v-model="task.is_complete"
+            id="firstCheckbox"
+          />
+          <label class="text-wrap" v-cloak @click="editTitle()">
+            {{ task.title }}
+          </label>
+
+          <button
+            @click="deleteTask(task.id)"
+            type="button"
+            class="btn btn-outline-dark rounded-pill input-group-append float-end"
+          >
+            Delete
+          </button>
+        </div>
+        <form v-else class="input-group-text" @submit.prevent="editTitle(task)">
+          <input
+            class="form-control"
+            type="text"
+            autocomplete="off"
+            v-model.trim="task.title"
+          />
+          <div class="btn-group">
+            <button type="button" class="btn" @click="onCancel">
+              <CancelIcon></CancelIcon>
+            </button>
+            <button type="submit" class="btn">
+              Save
+            </button>
+          </div>
+        </form>
+      </li>
+    </ul>
+    <BigButtonVue @click="deleteCompleted()">Delete completed</BigButtonVue>
+  </div>
 </template>
 
 <style scoped>
-.background-radial-gradient {
-  background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+.completed {
+  opacity: 0.4;
 }
-.bg-glass {
-  background-color: hsla(0, 0%, 100%, 0.95) !important;
-  backdrop-filter: saturate(200%) blur(25px);
+[v-cloak] {
+  display: none;
 }
-section {
-  width: 100vw;
-  min-height: 100vh;
+#button-addon2 {
+  background: linear-gradient(
+    90deg,
+    rgba(253, 29, 29, 1) 44%,
+    rgba(252, 176, 69, 1) 100%
+  );
 }
 </style>
