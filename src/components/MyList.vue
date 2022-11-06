@@ -18,8 +18,8 @@ const addTask = async () => {
   await taskStore.fetchTasks(id);
   title.value = "";
 };
-const deleteTask = async () => {
-  await taskStore.deleteTask();
+const deleteTask = async (taskId) => {
+  await taskStore.deleteTask(taskId);
   await taskStore.fetchTasks(id);
 };
 const toggleCompleted = async (task) => {
@@ -108,7 +108,6 @@ const onCancel = async () => {
               Delete
             </button>
           </div>
-
           <form
             v-if="task.edit"
             class="input-group-text"
